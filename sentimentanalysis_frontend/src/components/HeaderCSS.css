@@ -1,0 +1,44 @@
+.navb {
+    background-image: linear-gradient(to right, #DA22FF, #9733EE);
+}
+
+.heading {
+    font-size: xx-large;
+    color: black;
+    font-weight: bold;
+}
+
+.content:hover {
+    color: white;
+}
+
+.content {
+    font-size: x-large;
+    color: lightblue;
+    margin-left: 20px;
+}
+
+.lbutn {
+    background-color: darkred;
+    color: white;
+}
+
+.lbutn:hover {
+    background-color: white;
+    color: red;
+}
+
+.butn {
+    background-color: aliceblue;
+    color: purple;
+    margin-right: 20px;
+}
+
+.butn:hover {
+    background-image: linear-gradient(to left, darkviolet, purple);
+    color: white;
+}
+
+.navbar .nav-link.active {
+    color: white;
+}

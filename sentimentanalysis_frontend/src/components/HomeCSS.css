@@ -1,0 +1,8 @@
+.bttn{
+    background-image: linear-gradient(to left, #DA22FF, #9733EE);
+    color: white;
+}
+.bttn:hover{
+    color:white;
+    transform:scale(1.05,1.05);
+}
