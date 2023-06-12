@@ -1,7 +1,9 @@
 import Main from "./components/MainComponent";
 import axios from "axios";
 import "./App.css";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SignUp from "./components/SignUpComponent";
+import Login from "./components/LoginComponent";
 
 function App() {
   axios

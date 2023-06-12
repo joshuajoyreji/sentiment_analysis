@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { baseUrl } from '../utils/urls';
+import axiosInstance from '../auth/authHandler';
 
 function Login({ setIsLoggedIn }) {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
@@ -18,35 +20,55 @@ function Login({ setIsLoggedIn }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    axiosInstance
+      .post(`${baseUrl}/api/token/`, {
+        email: email,
+        password: password,
+      })
+      .then(
+        (res) => {
+          // console.log(res)
+          localStorage.setItem("access_token", res.data.access);
+          localStorage.setItem("refresh_token", res.data.refresh);
+          axiosInstance.defaults.headers["Authorization"] =
+            "Bearer " + localStorage.getItem("access_token");
+          if (res.status === 200) navigate("/profile");
+        },
+        (error) => {
+          console.log(error)
+        }
+      );
 
-    try {
-      // Send login request to Django backend
-      const response = await axios.post('/api/login', {
-        username,
-        password,
-      });
+    // try {
+    //   const userData = {
+    //     username,
+    //     password,
+    //   };
 
-      // Assuming the login request is successful
-      if (response.status === 200) {
-        // Perform any necessary actions, such as saving the authentication token
-        // or updating the user state
+  //     axios.post('http://localhost:3000/api/login/', userData)
+  //       .then(response => {
+  //         // Handle the response
+  //         if (response.status === 200) {
+  //           // Redirect the user to the dashboard or any desired page
+  //           navigate('/dashboard');
+  //         }
+  //       })
+  //       .catch(error => {
+  //         // Handle the error
+  //         setError('Login failed. Please try again.');
+  //         console.error(error);
+  //       });
+  //   } catch (error) {
+  //     // Handle any other errors
+  //     setError('Login failed. Please try again.');
+  //     console.error(error);
+  //   }
 
-        // Set the isLoggedIn state to true
-        setIsLoggedIn(true);
 
-        // Redirect the user to the desired page after successful login
-        navigate('/home');
-      }
-    } catch (error) {
-      // Handle login error, such as displaying an error message
-      setError('Login failed. Please check your credentials.');
-      console.error(error);
-    }
-
-    setUsername('');
-    setPassword('');
-  };
-
+  //   setUsername('');
+  //   setPassword('');
+  // };
+}
   return (
     <div className="container">
       <div className="row justify-content-center">
@@ -54,15 +76,15 @@ function Login({ setIsLoggedIn }) {
           <h1 className="offset-5 mt-5">Login</h1>
           <form onSubmit={handleSubmit}>
             <div className="mb-3 mt-4">
-              <label htmlFor="username" className="form-label fs-5">
-                Username:<span style={{ color: 'red' }}>*</span>
+              <label htmlFor="email" className="form-label fs-5">
+                Email:<span style={{ color: 'red' }}>*</span>
               </label>
               <input
                 type="text"
                 className="form-control"
-                id="username"
-                value={username}
-                onChange={handleUsernameChange}
+                id="email"
+                value={email}
+                onChange={handleEmailChange}
                 required
               />
             </div>
