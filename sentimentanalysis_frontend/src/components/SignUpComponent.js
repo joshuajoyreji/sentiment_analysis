@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { baseUrl } from "../utils/urls";
 
-function SignUp() {
+function SignUp({ setIsLoggedIn }) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,7 +34,8 @@ function SignUp() {
         (response) => {
           console.log(response);
           if (response.status === 201) {
-            navigate("/profile");
+            navigate("/home");
+            setIsLoggedIn(true);
           }
         },
         (error) => {
