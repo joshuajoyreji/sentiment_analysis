@@ -20,10 +20,22 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
     def create(self,validated_data):
-        return User.objects.create_user(**validated_data)
+        tweet = validated_data.pop('tweet','')
+        user = User.objects.create_user(**validated_data)
+        user.tweet = tweet
+        user.save()
+        return user
 
 
 class UserSerializer(serializers.ModelSerializer):
+    tweet = serializers.CharField(required= False)
     class Meta:
         model=User
         fields=['id','username','email']
+
+    def update(self, instance, validated_data):
+        tweet = validated_data.get('tweet', instance.tweet)
+        instance.tweet = tweet
+        instance.save()
+        return instance
+    

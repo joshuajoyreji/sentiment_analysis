@@ -13,7 +13,10 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 import os
 
-
+class SearchView(APIView):
+    def post(self, request):
+        tweet = request.data.get('tweet')
+        return Response({'message': 'Search successful', 'tweet':tweet})
 class BlacklistTokenView(APIView):
     permission_classes=[IsAuthenticated]
     def post(self,request):
@@ -33,3 +36,14 @@ class LoggedInUserView(APIView):
 class RegisterView(viewsets.GenericViewSet,mixins.CreateModelMixin,mixins.RetrieveModelMixin,mixins.ListModelMixin):
     serializer_class=RegisterSerializer
     queryset=User.objects.all() 
+
+    def update(self, request, *args, **kwargs):
+        tweet = request.data.get('tweet')
+
+        user = self.get_object()
+
+        user.tweet = tweet
+        user.save()
+
+        serializer = self.get_serializer(user)
+        return Response(serializer.data)

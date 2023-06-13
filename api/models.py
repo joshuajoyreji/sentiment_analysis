@@ -28,6 +28,7 @@ class UserManager(BaseUserManager):
         user.is_staff=True
         user.save(using=self._db)
         return user
+    
 class User(AbstractBaseUser,PermissionsMixin):
     username=models.CharField(max_length=255,unique=True,db_index=True)
     email=models.EmailField(max_length=255,unique=True,db_index=True)
@@ -40,6 +41,8 @@ class User(AbstractBaseUser,PermissionsMixin):
     REQUIRED_FIELDS=['username']
 
 
+    tweet = models.TextField(blank=True)
+    
     objects=UserManager()
     def __str__(self):
         return self.username

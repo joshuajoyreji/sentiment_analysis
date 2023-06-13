@@ -4,10 +4,10 @@ import './ProfileCSS.css'
 function Profile() {
     // Sample data for past searches
     const pastSearches = [
-        { id: 1, query: 'Etayi Coffee' },
-        { id: 2, query: 'Enthanu bro modayano' },
-        { id: 3, query: 'De chechi pinneyum ' },
-        { id: 4, query: 'VISHNUUUU ' },
+        { id: 1, query: 'Tweet 1' },
+        { id: 2, query: 'Tweet 2' },
+        { id: 3, query: 'Tweet 3' },
+        { id: 4, query: 'Tweet 4' },
     ];
 
     return (
@@ -19,7 +19,7 @@ function Profile() {
                     </div>
                 </div>
                 <div className="col-md-4">
-                    <h2>Moda Bro</h2>
+                    <h2>ABC</h2>
                 </div>
             </div>
             <div className="row justify-content-center mt-5">

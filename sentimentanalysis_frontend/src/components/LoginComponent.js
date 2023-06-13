@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { baseUrl } from '../utils/urls';
 import axiosInstance from '../auth/authHandler';
 
@@ -41,36 +40,6 @@ function Login({ setIsLoggedIn }) {
           console.log(error)
         }
       );
-
-    // try {
-    //   const userData = {
-    //     username,
-    //     password,
-    //   };
-
-  //     axios.post('http://localhost:3000/api/login/', userData)
-  //       .then(response => {
-  //         // Handle the response
-  //         if (response.status === 200) {
-  //           // Redirect the user to the dashboard or any desired page
-  //           navigate('/dashboard');
-  //         }
-  //       })
-  //       .catch(error => {
-  //         // Handle the error
-  //         setError('Login failed. Please try again.');
-  //         console.error(error);
-  //       });
-  //   } catch (error) {
-  //     // Handle any other errors
-  //     setError('Login failed. Please try again.');
-  //     console.error(error);
-  //   }
-
-
-  //   setUsername('');
-  //   setPassword('');
-  // };
 }
   return (
     <div className="container">
