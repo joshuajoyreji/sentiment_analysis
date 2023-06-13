@@ -32,7 +32,10 @@ function Login({ setIsLoggedIn }) {
           localStorage.setItem("refresh_token", res.data.refresh);
           axiosInstance.defaults.headers["Authorization"] =
             "Bearer " + localStorage.getItem("access_token");
-          if (res.status === 200) navigate("/profile");
+          if (res.status === 200) {
+            navigate("/home");
+            setIsLoggedIn(true);
+          }
         },
         (error) => {
           console.log(error)
