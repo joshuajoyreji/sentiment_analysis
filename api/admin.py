@@ -1,4 +1,5 @@
 from django.contrib import admin
+from .models import Tweet
 
 # Register your models here.
 from django.contrib import admin
@@ -31,6 +32,17 @@ class UserAdminConfig(UserAdmin):
     )
 
 
-
-
 admin.site.register(User)
+
+@admin.register(Tweet)
+class TweetAdmin(admin.ModelAdmin):
+    list_display = ['content', 'user', 'created_at']
+
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+        queryset = queryset.select_related('user')
+        return queryset
+
+    def user(self, obj):
+        return obj.user.username
+    user.short_description = 'User'

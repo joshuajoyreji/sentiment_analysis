@@ -1,7 +1,8 @@
 from django.db import models
 from email.policy import default
 from django.contrib.auth.models import (AbstractBaseUser,BaseUserManager,PermissionsMixin)
-
+from django.contrib.auth import get_user_model
+from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 
 class UserManager(BaseUserManager):
     def create_user(self,username,email,password=None):
@@ -40,13 +41,25 @@ class User(AbstractBaseUser,PermissionsMixin):
     USERNAME_FIELD='email'
     REQUIRED_FIELDS=['username']
 
-
-    tweet = models.TextField(blank=True)
-    
     objects=UserManager()
     def __str__(self):
         return self.username
 
 
     def tokens(self):
-        return ''
+        refresh = RefreshToken.for_user(self)
+        access = AccessToken.for_user(self)
+
+        return {
+            'refresh': str(refresh),
+            'access': str(access),
+        }
+
+
+class Tweet(models.Model):
+    content = models.CharField(max_length=280)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Tweet: {self.content}'

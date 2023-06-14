@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tweet List</title>
+</head>
+<body>
+    <h1>Tweets</h1>
+    <ul>
+        {% for tweet in tweets %}
+        <li>{{ tweet.content }} - {{ tweet.user }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

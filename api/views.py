@@ -1,6 +1,4 @@
 from django.shortcuts import render
-
-# Create your views here.
 from django.conf import settings
 from rest_framework import generics,mixins,viewsets,status
 from django.http import JsonResponse
@@ -12,11 +10,22 @@ from rest_framework_simplejwt.tokens import RefreshToken,AccessToken
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 import os
+from django.contrib.auth import get_user_model
+from .models import Tweet
 
 class SearchView(APIView):
     def post(self, request):
         tweet = request.data.get('tweet')
-        return Response({'message': 'Search successful', 'tweet':tweet})
+        user = request.user
+        print(request.user)
+        try:
+            user_obj = get_user_model().objects.get(pk=user.pk)
+            tweet_obj = Tweet.objects.create(content=tweet, user=user_obj)
+
+            return Response({'message': 'Search successful', 'tweet': tweet}, status=status.HTTP_200_OK)
+        except User.DoesNotExist:
+            return Response({'message': 'User does not exist'}, status=status.HTTP_404_NOT_FOUND)
+    
 class BlacklistTokenView(APIView):
     permission_classes=[IsAuthenticated]
     def post(self,request):
@@ -28,8 +37,10 @@ class BlacklistTokenView(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 class LoggedInUserView(APIView):
     permission_classes=[IsAuthenticated]
+
     def get(self, request):
         serializer = UserSerializer(request.user)
+        print(serializer.data)
         return JsonResponse(serializer.data)
 
 
@@ -47,3 +58,7 @@ class RegisterView(viewsets.GenericViewSet,mixins.CreateModelMixin,mixins.Retrie
 
         serializer = self.get_serializer(user)
         return Response(serializer.data)
+    
+def tweet_list(request):
+    tweets = Tweet.objects.all()
+    return render(request, 'api/tweet_list.html', {'tweets': tweets})

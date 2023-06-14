@@ -88,6 +88,7 @@ function SignUp({ setIsLoggedIn }) {
                 value={username}
                 onChange={handleUsernameChange}
                 required
+                autoComplete='off'
               />
             </div>
             <div className="mb-3">
@@ -101,6 +102,7 @@ function SignUp({ setIsLoggedIn }) {
                 value={email}
                 onChange={handleEmailChange}
                 required
+                autoComplete='off'
               />
             </div>
             <div className="mb-3">

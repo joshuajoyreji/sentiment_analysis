@@ -58,6 +58,7 @@ function Login({ setIsLoggedIn }) {
                 value={email}
                 onChange={handleEmailChange}
                 required
+                autoComplete='off'
               />
             </div>
             <div className="mb-3">
@@ -71,6 +72,7 @@ function Login({ setIsLoggedIn }) {
                 value={password}
                 onChange={handlePasswordChange}
                 required
+                autoComplete='off'
               />
             </div>
             <button type="submit" className="btn bttn">
