@@ -42,7 +42,7 @@ function Login({ setIsLoggedIn }) {
       );
 }
   return (
-    <div className="container">
+    <div className="container container-content">
       <div className="row justify-content-center">
         <div className="col-md-6">
           <h1 className="offset-5 mt-5">Login</h1>
