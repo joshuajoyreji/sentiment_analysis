@@ -18,7 +18,7 @@ function Header({ isLoggedIn, handleLogout }) {
                     <NavbarToggler onClick={() => setIsOpen(!isOpen)} />
                     <div className="d-flex align-items-center">
                         <NavbarBrand className="heading" tag={NavLink} to="/home">
-                            SentimentSpy
+                            InSight
                         </NavbarBrand>
                         <Collapse isOpen={isOpen} navbar>
                             <Nav className="me-auto" navbar>

@@ -1,8 +1,48 @@
-.bttn{
+.bttn {
     background-image: linear-gradient(to left, #DA22FF, #9733EE);
     color: white;
 }
-.bttn:hover{
-    color:white;
-    transform:scale(1.05,1.05);
+
+.bttn:hover {
+    color: white;
+    transform: scale(1.05, 1.05);
+}
+
+.head {
+    font-size: 50px;
+    text-align: center;
+    font-weight: bold;
+    background: linear-gradient(to left, #DA22FF, #9733EE);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.head2{
+    font-size: xx-large;
+    color: black;
+    font-weight: bold;
+}
+
+.para {
+    text-align: center;
+    font-size: larger;
+}
+.endpara{
+    text-align: center;
+    font-size: larger;
+}
+
+.list {
+    font-size: large;
+}
+
+.card-with-border {
+    border: 10px solid;
+    border-image-slice: 1;
+    border-width: 5px;
+    border-image-source: linear-gradient(to left, #DA22FF, #9733EE);
+}
+
+.card-img {
+    height: 230px;
 }
